@@ -1,0 +1,806 @@
+input,expected_outcome,actual_output,meta_weight,context,meta_domain,meta_category,meta_test_type,meta_security,meta_authorization,
+"Provider: ""Hello Ms. Smith. Your doctor requested a urology consult to see if you have an obstructing kidney stone or if you need any interventions. How are you feeling today? ""
+Patient: ""OK. I'm still having low back pain on my right side that hurts more when I move.""
+Provider: ""How would you describe the pain? Sharp? Dull? Cramp-like? On a scale of 1 to 10?""
+Patient: ""It's a dull pain and it's probably about a 7.""
+Provider: ""Is the pain traveling anywhere else on your body?""
+Patient: ""No. Just in my lower back.""
+Provider: ""Are you having any pain when you pee?""
+Patient: ""Yes.""
+Provider: ""Are you having to pee often? More often than normal?""
+Patient: ""Yes.""
+Provider: ""Do you see any blood when you pee?""
+Patient: ""No, no blood.""
+Provider: ""Are you feeling nauseous? Have you had to vomit?""
+Patient: ""No.""
+Provider: ""Have you ever had kidney stones before?""
+Patient: ""No, not that I know of.""
+Provider: ""Have you ever had a UTI before?""
+Patient: ""No.""
+Provider: ""Do you take any medications?""
+Patient: ""I take Enalapril.""
+Provider: ""Is that to treat your high blood pressure?""
+Patient: ""Yes, I think so.""
+Provider: ""Do you know the dosage?""
+Patient: ""I think 30 mg.""","High Weightage:
+1. Reason for consultation: Urology consulted to evaluate for obstructing stone or any indication for intervention.
+2. History of present illness: Ms. Smith a 34-year-old female [from chart] with no significant urological history admitted for fever, right flank pain, and dysuria. Patient reports - Flank pain: dull, 7/10, non-radiating, worse with movement; fever: Tmax 102.4 F at home and in ED (from chart); urinary symptoms: dysuria, frequency, but no hematuria; no prior history: of stones or UTI; denies nausea, vomiting
+3. Current medications: IV ceftriaxone, Enalapril, 30 mg","=== CLINICAL DATA EXTRACTION ===
+
+1. Chief Complaint/Reason for Visit:
+   - Patient was referred for a urology consult due to suspected obstructing kidney stone
+   - Patient reports ongoing right-sided lower back pain
+
+2. History of Present Illness (HPI):
+   - Onset and duration: Not specified
+   - Frequency and timing: Not specified
+   - Character/quality of symptoms: Dull pain in the lower back
+   - Location and radiation: Right-sided lower back, no radiation reported
+   - Severity: Pain rated as 7 on a scale of 1 to 10
+   - Aggravating and alleviating factors: Pain increases with movement
+   - Associated symptoms: Pain during urination, increased frequency of urination
+   - Previous episodes: No known history of kidney stones or UTIs
+
+3. Current Medications:
+   - Enalapril, 30 mg, for high blood pressure
+
+4. Allergies: Not mentioned:
+
+5. Vital Signs: Not mentioned:
+
+6. Past Medical History:
+   - Hypertension, treated with Enalapril
+
+7. Surgical History: Not mentioned:
+
+8. Family History: Not mentioned:
+
+9. Social History: Not mentioned:
+
+10. Review of Systems:
+   - Positive for back pain, dysuria, and urinary frequency
+   - Negative for hematuria, nausea, and vomiting
+
+11. Physical Exam Findings: Not mentioned:
+
+12. Previous Test Results: Not mentioned:
+
+13. Assessment/Differential Diagnosis:
+   - Suspected obstructing kidney stone
+
+14. Diagnostic Plan: Not mentioned:
+
+15. Treatment Plan: Not mentioned:
+
+16. Patient Education: Not mentioned:
+
+17. Follow-up Instructions: Not mentioned:
+
+18. Referrals: Urology consult requested:
+
+=== END OF EXTRACTION ===",High,Admission for acute pyelonephritis urology consult,healthcare,scribe_documentation,conversational,Standard,authenticated_provider,
+"Provider: ""Hi Mr. James. Your doctor requested a urology consult to see if any interventions are needed with your kidney stone.""
+Patient: ""Oh ok - hi.""
+Provider: ""How is your pain? What would you rank it on a scale from 1 to 10?""
+Patient: ""I would say a 10 out of 10.""
+Provider: ""I'm sorry, did you say 2 out of 10?""
+Patient: ""No, 10 not 2.""
+Provider: ""Is the pain medication - ketorolac - helping?""
+Patient: ""A little bit.""
+Provider: ""Got it. And that's on your right side?""
+Patient: ""Yes. My right lower back, but I feel it in my groin area too. And it's not all the time, but it comes in sharp bursts.""
+Provider: ""Are you having any nausea or vomiting?""
+Patient: ""Yes, but it's gotten better.""
+Provider: ""Are you having any pain when you pee?""
+Patient: ""Nope.""
+Provider: ""Have you seen any blood in your pee?""
+Patient: ""No.""
+Provider: ""And I see in your chart that you had an obstructing kidney stone that required ureteroscopy about 2 years ago?""
+Patient: ""Yes, that's right.""
+Provider: ""Ok. I'm going to do my exam now. Your abdomen is soft and non-distended. Can you please sit up? Is this pain full when I tap here?""
+Patient: ""It hurts a little bit.""
+Provider: ""So mild right CVA tenderness. I'm also going to check your scrotum. I'm not seeing any swelling. Are you having any tenderness?""
+Patient: ""No, not at all.""
+Provider: ""Based on my assessment, I do think we should proceed with ureteroscopy with laser lithotripsy and place a ureteral stent. We will be reviewing the risks with the procedure and will get your consent. Depending on how the procedure goes, we may need to stage them. After the procedure you may experience some pain when peeing and may feel urgency with the stent. I will plan to schedule the procedure for tomorrow morning. Do you have any questions?""
+Patient: ""No, that sounds good doc.""","High Weightage:
+1. History of present illness - Mr. James is a 45-year-old male [from chart] with history of nephrolithiasis, presenting with acute right flank pain, nausea, and vomiting. Pain is colicky, 10/10, radiating to the right groin. Denies dysuria or hematuria, but UA shows gross hematuria [from chart]. No fevers or chills [from chart]. Similar episode 2 years ago required ureteroscopy for obstructing stone. Pain somewhat improved with ketorolac.
+2. Physical exam - abdomen - soft, non-distended, mild right CVA tenderness; GU - no scrotal swelling or tenderness
+3. Intervention needed - proceed with ureteroscopy with laser lithotripsy and ureteral stent placement, informed consent to be obtained
+4. Procedure plan - schedule for OR tomorrow morning
+Medium Weightage:
+5. Patient education - discussed with patient the likelihood of ureteral stent placement, possible need for staged procedures, and post-op expectations (e.g., dysuria, urgency with stent)","=== CLINICAL DATA EXTRACTION ===
+
+1. Chief Complaint/Reason for Visit:
+   - Patient referred for urology consult due to kidney stone
+
+2. History of Present Illness (HPI):
+   - Onset and duration: Not specified
+   - Frequency and timing: Pain comes in sharp bursts, not constant
+   - Character/quality of symptoms: Sharp pain
+   - Location and radiation: Right lower back, radiating to groin area
+   - Severity (scale if mentioned): 10 out of 10
+   - Aggravating and alleviating factors: Not specified
+   - Associated symptoms: Nausea and vomiting (improved), no hematuria, no dysuria
+   - Previous episodes: History of obstructing kidney stone requiring ureteroscopy 2 years ago
+
+3. Current Medications:
+   - Ketorolac, dose and frequency not specified, for pain management
+
+4. Allergies: Not mentioned:
+
+5. Vital Signs: Not mentioned:
+
+6. Past Medical History:
+   - Obstructing kidney stone requiring ureteroscopy 2 years ago
+
+7. Surgical History: Not mentioned:
+
+8. Family History: Not mentioned:
+
+9. Social History: Not mentioned:
+
+10. Review of Systems: Not mentioned:
+
+11. Physical Exam Findings:
+   - Abdomen: Soft, non-distended
+   - Right CVA: Mild tenderness
+   - Scrotum: No swelling or tenderness
+
+12. Previous Test Results: Not mentioned:
+
+13. Assessment/Differential Diagnosis:
+   - Kidney stone
+
+14. Diagnostic Plan: Not mentioned:
+
+15. Treatment Plan:
+   - Ureteroscopy with laser lithotripsy and placement of a ureteral stent planned for the next day
+   - Possible staging of procedures depending on initial outcome
+   - Anticipated post-procedure symptoms: Pain during urination, urinary urgency due to stent
+
+16. Patient Education:
+   - Discussed plan for ureteroscopy with laser lithotripsy and placement of a ureteral stent
+   - Reviewed potential risks and need for consent
+   - Explained possible post-procedure symptoms
+
+17. Follow-up Instructions: Not mentioned:
+
+18. Referrals: Not mentioned:
+
+=== END OF EXTRACTION ===",High,Admission for urolithiasis (kidney stone),healthcare,scribe_documentation,conversational,Standard,authenticated_provider,
+"Provider: ""Good morning Mr. Sanchez. Your doctor requested urology evaluate you in case you had any BPH related obstruction.""
+Patient: ""Ok - buenos dias.""
+Provider: ""Can you tell me a little bit about what's going on?""
+Patient: ""I noticed my urine stream is not so strong anymore and I've been waking up to pee. Also sometimes it takes me a while to starting peeing. It's been getting worse over the last year, but this is the first time I haven't been able to pee at all.""
+Provider: ""Are you having any pain?""
+Patient: ""When I first came in I had very bad pain low in my stomach, but whatever they did in the ED helped a lot.""
+Provider: ""Have. you had any fevers or chills?""
+Patient: ""No.""
+Provider: ""Any pain when you pee?""
+Patient: ""No.""
+Provider: ""Have you noticed any blood in your urine recently?""
+Patient: ""No.""
+Provider: ""And I see here you have a history of BPH?""
+Patient: ""Si.""
+Provider: ""But you've never had any surgery on your prostate?""
+Patient: ""No.""
+Provider: ""Have you started any new medications recently?""
+Patient: ""No.""
+Provider: ""And you haven't had a stroke, or been diagnosed with Parkinson's or MS, or anything like that, correct?""
+Patient: ""No, no - nothing like that.""
+Provider: ""Ok. I'm going to do my exam now. Your abdomen feels soft and is mildly distended. I'm not feeling any guarding. Any pain when I release pressure?""
+Patient: ""No.""
+Provider: ""I'm going to a quick exam of your genitals. I'm seeing normal external genitalia; no phimosis or meatal stenosis. Next I will need to check your prostate. Your prostate is smooth and symmetrically enlarged. Are you feeling any pain or tenderness?""
+Patient: ""No.""
+Provider: ""Ok, so for now I think we should keep the Foley catheter in place at least for the next 2-3 days. We will then see how you do without the catheter. I also want to start you on a medication to help your BPH. It's called tamsulosin. I want you to take 0.4 mg by mouth once a day. I would like to see you again in my urology clinic in about 1-2 weeks. Do you have any questions?""
+Patient: ""No, doctor. That all sounds good. Gracias.""
+","High Weightage:
+1. History of present illness - Mr. Sanchez is a 72-year-old male [from chart} with a known history of BPH and presents with acute onset urinary retention. He reports a progressive decline in urinary stream strength, increased nocturia, and hesitancy over the past year, but never complete retention until now. He had significant suprapubic discomfort on arrival to the ED. ED team placed a Foley catheter with return of ~900 mL of clear yellow urine [from chart], leading to symptomatic relief. He denies fever, chills, dysuria, or hematuria. No prior prostate surgery. No new medications or neurological symptoms.
+2. Physical exam - Abdomen - soft, mildly distended; no rebound or guarding; Genital exam- normal external genitalia; no phimosis or meatal stenosis; Rectal exam - smooth, symmetrically enlarged prostate, non-tender
+3. Maintain Foley catheter in place - recommend catheter retention x2-3 days
+4. Start medical therapy for BPH - initiate tamsulosin 0.4 mg PO daily
+Medium Weightage:
+5. Voiding trial - plan TWOC (trial without catheter) in 2-3 days
+6. Follow-up - outpatient follow-up in urology clinic within 1-2 weeks post-TWOC","=== CLINICAL DATA EXTRACTION ===
+
+1. Chief Complaint/Reason for Visit:
+   - Patient reports a weak urine stream, difficulty initiating urination, and nocturia. These symptoms have been worsening over the past year, and the patient recently experienced acute urinary retention.
+
+2. History of Present Illness (HPI):
+   - Onset and duration: Symptoms have been worsening over the past year, with recent acute urinary retention.
+   - Character/quality of symptoms: Weak urine stream, difficulty initiating urination, nocturia.
+   - Severity: Severe enough to cause acute urinary retention.
+   - Aggravating and alleviating factors: Alleviated by Foley catheter placement in the ED.
+   - Associated symptoms: Lower abdominal pain, which was alleviated in the ED.
+   - Previous episodes: No mention of previous episodes.
+
+3. Current Medications: None mentioned.:
+
+4. Allergies: None mentioned.:
+
+5. Vital Signs: Not mentioned.:
+
+6. Past Medical History:
+   - Diagnosed with Benign Prostatic Hyperplasia (BPH).
+   - No history of stroke, Parkinson's disease, or Multiple Sclerosis.
+
+7. Surgical History: No history of prostate surgery.:
+
+8. Family History: Not mentioned.:
+
+9. Social History: Not mentioned.:
+
+10. Review of Systems:
+   - Denies fevers, chills, dysuria, and hematuria.
+
+11. Physical Exam Findings:
+   - Abdomen: Soft, mildly distended, no guarding, no pain on release of pressure.
+   - Genitalia: Normal external genitalia, no phimosis or meatal stenosis.
+   - Prostate: Smooth and symmetrically enlarged, no pain or tenderness.
+
+12. Previous Test Results: Not mentioned.:
+
+13. Assessment/Differential Diagnosis: BPH with acute urinary retention.:
+
+14. Diagnostic Plan: Not mentioned.:
+
+15. Treatment Plan:
+   - Medications prescribed/changed: Tamsulosin 0.4 mg orally once daily for BPH.
+   - Non-pharmacological interventions: Foley catheter to remain in place for 2-3 days.
+   - Follow-up: Urology clinic in 1-2 weeks.
+
+16. Patient Education: Explained the need for Foley catheter and the use of tamsulosin for BPH.:
+
+17. Follow-up Instructions: Return to urology clinic in 1-2 weeks.:
+
+18. Referrals: Not mentioned.:
+
+=== END OF EXTRACTION ===",Can AI correctly understand if patient speaks both English and Spanish during conversation (simple test here),High,Admission for urinary retention,healthcare,scribe_documentation,conversational,Standard,authenticated_provider
+"Provider: ""Hello Ms. Jacobson. Can you tell me what brings you in today?""
+Patient: ""I've been throwing up and feeling weak for the past few days.""
+Provider: ""OK. I see here that you have type 2 diabetes?""
+Patient: ""Well I was told I have high sugar.""
+Provider: ""Are you having any pain?""
+Patient: ""My stomach doesn't feel good, but I'm not having any pain really.""
+Provider: ""Are you feeling thirsty? And peeing more than usual?""
+Patient: ""Yes. And I'm not really feeling hungry and haven't been eating much.""
+Provider: ""Have you been checking your blood glucose?""
+Patient: ""Yeah, my sugar has been high.""
+Provider: ""Do you remember what it's been?""
+Patient: ""Like 400 and 500. I mean I know it's been higher than it should be. I might have forgotten to take my insulin a little bit here and there. I just kinda forgot.""
+Provider: ""I see. Have you ever come to the hospital before for your diabetes, or for having these same symptoms?""
+Patient: ""No. This is the first time.""
+Provider: ""Are you having any chest pain or shortness of breath?""
+Patient: ""No.""
+Provider: ""Have you traveled recently?""
+Patient: ""No. Not since last year.""
+Provider: ""Has anyone you know been sick?""
+Patient: ""No, not that I know of.""
+Provider: ""Have you had a fever?""
+Patient: ""I haven't had a temperature.""","High Weightage:
+1. Chief complaint: ""I've been throwing up and feeling weak for the past few days.""
+2. History of present illness: Ms. Jacobson is a 35-year-old female [chart] with known type 2 diabetes mellitus, presenting with nausea, vomiting, generalized weakness, and abdominal discomfort for the past 2-3 days. The patient also reports increased thirst, frequent urination, and poor oral intake. Blood glucose at home was noted to be in the 400-500s. The patient reports missing several doses of insulin due to noncompliance. No history of DKA episodes. Denies chest pain, shortness of breath, or recent travel. No known sick contacts. Denies fever.","=== CLINICAL DATA EXTRACTION ===
+
+1. Chief Complaint/Reason for Visit:
+   - Patient reports vomiting and feeling weak for the past few days
+
+2. History of Present Illness (HPI):
+   - Onset and duration: Symptoms started a few days ago
+   - Character/quality of symptoms: Patient has been vomiting and feeling weak
+   - Associated symptoms: Patient reports increased thirst, increased urination, lack of appetite, and stomach discomfort
+   - Previous episodes: This is the first time the patient has experienced these symptoms
+
+3. Current Medications:
+   - Patient is on insulin for diabetes, but admits to occasional non-compliance
+
+4. Past Medical History:
+   - Patient has a known history of type 2 diabetes
+
+5. Review of Systems:
+   - Patient denies chest pain, shortness of breath, and fever
+   - Patient has not been eating much due to lack of appetite
+
+6. Assessment/Differential Diagnosis:
+   - The provider is considering poor glycemic control due to the patient's high blood glucose readings and symptoms of increased thirst, urination, and vomiting
+
+7. Patient Education:
+   - The provider has asked the patient about her symptoms and blood glucose levels to educate her about the importance of regular insulin use and monitoring of blood glucose levels
+
+=== END OF EXTRACTION ===",Test if AI able to understand slang used by some patients with diabetes,High,Admission for diabetic ketoacidosis,healthcare,scribe_documentation,conversational,Standard,authenticated_provider
+"Provider: ""Good afternoon Mr. Sikes. What brings you in today?""
+Patient: ""I've had a cough and fever for a few days, and now I'm having trouble breathing.""
+Provider: ""How long would you say you've been having these symptoms?""
+Patient: ""Probably like the last three days. Well, maybe like 5 days.""
+Provider: ""Tell me a little more about your cough.""
+Patient: ""I've been coughing stuff up and having to spit it in a tissue. It's kind of yellow or maybe greenish.""
+Provider: ""I see. Any blood?""
+Patient: ""No, no blood.""
+Provider: ""Have you had a fever? Chills?""
+Patient: ""Yes. I've had a fever and have gotten the chills.""
+Provider: ""Is there anyone you've been in contact with that has been sick?""
+Patient: ""Not that I know of.""
+Provider: ""Any recent travel?""
+Patient: ""Nope.""
+Provider: ""Any pain in your chest? Especially when you breath, laugh, or cough?""
+Patient: ""Definitely.""
+Provider: ""Are you having shortness of breath?""
+Patient: ""Yes, it feels like I can't catch my breath.""
+Provider: ""Have you been eating normally? Any nausea? Vomiting?""
+Patient: ""I haven't been as hungry as usual, but I'm not really feeling nauseous and not vomiting.""
+Provider: ""Have you had any diarrhea?""
+Patient: ""No.""
+Provider: ""Ok. I'm going to start my exam now. First let me listen to your lungs. Do you smoke or vape?""
+Patient: ""I used to smoke, but I stopped about 5 years ago.""
+Provider: ""Oh, ok. How much did you smoke?""
+Patient: ""About a pack a day.""
+Provider: ""And for how long? How many years?""
+Patient: ""About 20 years.""
+Provider: ""Ok. I'm hearing decreased breath sounds with crackles in your right left lobe. Can you please say the letter ""eee"" sound for me?""
+Patient: ""Eee, eee, eee, eee""
+Provider: ""Perfect, thank you. I am hearing egophony. And I see you are having to work a bit harder to breathe.""","High Weightage:
+1. Chief complaint: ""I've had a cough and fever for a few days, and now I'm having trouble breathing.""
+2. History of present illness: Mr. Sikes is a 68-year-old male with a history of hypertension [age, hx in chart], presenting with 3-5 days of productive cough, fevers, chills, pleuritic chest pain, and increasing shortness of breath. Reports yellow-green sputum and decreased appetite. Denies hemoptysis. No recent sick contacts or travel. Denies nausea, vomiting, or diarrhea.
+3. Physical exam - Respiratory: Decreased breath sounds with crackles and egophony in the RLL. Mildly increased work of breathing.
+Medium Weightage:
+4. Social history: Former smoker (20 pack-years, quit 5 years ago)","=== CLINICAL DATA EXTRACTION ===
+
+1. Chief Complaint/Reason for Visit:
+   - Patient presents with a cough, fever, and difficulty breathing.
+
+2. History of Present Illness (HPI):
+   - Onset and duration: Symptoms started approximately 3-5 days ago.
+   - Character/quality of symptoms: Productive cough with yellow-green sputum, fever, chills, chest pain, and shortness of breath.
+   - Associated symptoms: Decreased appetite.
+   - Previous episodes: Not mentioned.
+   - Aggravating and alleviating factors: Not mentioned.
+   - Severity: Not quantified.
+   - Location and radiation: Chest pain, no radiation mentioned.
+   - Frequency and timing: Not mentioned.
+
+3. Current Medications: Not mentioned.:
+
+4. Allergies: Not mentioned.:
+
+5. Vital Signs: Not mentioned.:
+
+6. Past Medical History: Not mentioned.:
+
+7. Surgical History: Not mentioned.:
+
+8. Family History: Not mentioned.:
+
+9. Social History:
+   - Tobacco use: Patient smoked 1 pack/day for 20 years, quit 5 years ago.
+   - Alcohol consumption: Not mentioned.
+   - Recreational drug use: Not mentioned.
+   - Caffeine intake: Not mentioned.
+   - Occupation: Not mentioned.
+   - Exercise habits: Not mentioned.
+
+10. Review of Systems:
+   - Positive for cough, fever, chills, chest pain, shortness of breath, and decreased appetite.
+   - Negative for blood in sputum, recent contact with sick individuals, recent travel, nausea, vomiting, and diarrhea.
+
+11. Physical Exam Findings:
+   - Decreased breath sounds with crackles in the right lower lobe.
+   - Egophony present.
+   - Increased work of breathing observed.
+
+12. Previous Test Results: Not mentioned.:
+
+13. Assessment/Differential Diagnosis: Not mentioned.:
+
+14. Diagnostic Plan: Not mentioned.:
+
+15. Treatment Plan: Not mentioned.:
+
+16. Patient Education: Not mentioned.:
+
+17. Follow-up Instructions: Not mentioned.:
+
+18. Referrals: Not mentioned.:
+
+=== END OF EXTRACTION ===","Ensure AI is able to correctly place ""social history"" information in the Subjective - Social History section of SOAP note if information is elicited during physical exam (Objective)
+
+Note: Not a full interview and not a full physical exam - can expand if needed.",High,Admission for community acquired pneumonia,healthcare,scribe_documentation,conversational,Standard,authenticated_provider
+"Provider: ""Good morning Ms. Olivier. So tell me what's going on.""
+Patient: ""I can't catch my breath and my legs are swollen.""
+Provider: ""And you have a history of heart failure, is that correct?""
+Patient: ""Yes. And I also have high blood pressure and kidney disease.""
+Provider: ""Thanks. Tell me more about your breathing.""
+Patient: ""Over the last 4 or 5 days I've been having a harder and harder time catching my breath. It gets even worse when I lay down. I've been sleeping with 3 pillows.""
+Provider: ""Have you had any chest pain?""
+Patient: ""No. Nothing like that.""
+Provider: ""What about a cough?""
+Patient: ""No, doctor.""
+Provider: ""And any fevers?""
+Patient: ""No.""
+Provider: ""Ok. Tell me about your leg swelling - is it both legs?""
+Patient: ""Yes, it's both of my legs.""
+Provider: ""Got it. How are you doing on your low-salt diet?""
+Patient: ""I might not be following it so good. With the holidays I've been eating food with my family that I'm probably not supposed to.""
+Provider: ""I can understand that. What about taking your medication?""
+Patient: ""Well now, my water pill was making my stomach hurt so I didn't take if for a few days.""
+Provider: ""I see you're taking a couple diuretics. Which pill did you stop taking?""
+Patient: ""Oh - the furosemide.""
+Provider: ""Have you weighed yourself recently?""
+Patient: ""I did notice I gained about 6 pounds since last week.""
+Provider: ""I see. And do you have a family history of cardiovascular disease? I think that information is blank here in your chart.""
+Patient: ""Not that I know of. My dad died of a heart attack. But he didn't have heart failure like me.""
+Provider: ""Oh ok. That helps.""
+","High Weightage:
+1. Chief complaint: ""I can't catch my breath and my legs are swollen.""
+2. History of present illness: ""Ms. Olivier is a 74-year-old female with a history of chronic systolic heart failure (HFrEF) with EF 30% [from chart], hypertension, and CKD, who presents with progressive shortness of breath, orthopnea, and bilateral extremity swelling over the past 4-5 days. Denies chest pain, fever, or cough. Reports sleeping on 3 pillows due to dyspnea. Noncompliant with salt-restricted diet and missed several doses of furosemide due to GI upset. Weight gain of ~6 lbs. reported over the last week.
+Medium Weightage:
+3. Family History: Positive for cardiovascular disease","=== CLINICAL DATA EXTRACTION ===
+
+1. Chief Complaint/Reason for Visit:
+   - Difficulty in breathing and leg swelling
+
+2. History of Present Illness (HPI):
+   - Onset and duration: Breathing difficulty has been increasing over the last 4-5 days
+   - Character/quality of symptoms: Difficulty in catching breath, worsens when lying down
+   - Location and radiation: Not specified
+   - Severity: Not specified
+   - Aggravating and alleviating factors: Lying down aggravates the difficulty in breathing
+   - Associated symptoms: Bilateral leg swelling
+   - Previous episodes: Not mentioned
+
+3. Current Medications:
+   - Furosemide (dose and frequency not specified)
+
+4. Allergies:
+   - No allergies mentioned
+
+5. Vital Signs:
+   - Not mentioned
+
+6. Past Medical History:
+   - Heart failure
+   - Hypertension
+   - Kidney disease
+
+7. Surgical History:
+   - Not mentioned
+
+8. Family History:
+   - Father died of a heart attack, no known history of heart failure
+
+9. Social History:
+   - Diet: Admitted to not strictly following low-salt diet
+
+10. Review of Systems:
+   - Denies chest pain
+   - Denies cough
+   - Denies fever
+
+11. Physical Exam Findings:
+   - Not mentioned
+
+12. Previous Test Results:
+   - Recent weight gain of 6 pounds since last week
+
+13. Assessment/Differential Diagnosis:
+   - Not mentioned
+
+14. Diagnostic Plan:
+   - Not mentioned
+
+15. Treatment Plan:
+   - Not mentioned
+
+16. Patient Education:
+   - Not mentioned
+
+17. Follow-up Instructions:
+   - Not mentioned
+
+18. Referrals:
+   - Not mentioned
+
+=== END OF EXTRACTION ===",Can AI understand that a patient has a positive family history of cardiovascular disease without a verbal response/correction to the patient by the provider?,High,Admission for heart failure exacerbation,healthcare,scribe_documentation,conversational,Standard,authenticated_provider
+"Provider: ""Hi Mr. McMillan. Can you tell me what brings you to the ED today?""
+Patient: ""I can't stop shaking and I feel like I'm going to crawl out of my skin.""
+Provider: ""Ok. Can you tell me a little more about what's going on?""
+Patient: ""I can't stop shaking and sweating. I'm also feeling sick to my stomach and can't sleep. My anxiety is really bad too.""
+Provider: ""I see here that you have a history of alcohol use disorder. Have you recently stopped drinking?""
+Patient: ""Yes, I haven't had anything to drink in about a day.""
+Provider: ""I see. How much did you drink before you stopped?""
+Patient: ""I probably drank like 12 to 18 beers a day.""
+Provider: ""And for how long? How many years?""
+Patient: ""Like 20.""
+Provider: ""Have you tried stopping before?""
+Patient: ""Yeah, quite a few times. One time I had a seizure when I tried to stop.""
+Provider: ""When did this happen?""
+Patient: ""I think like 3 years ago.""
+Provider: ""Oh ok. What about your symptoms now - Are you having any hallucinations?""
+Patient: ""No doc.""
+Provider: ""Any seizures?""
+Patient: ""Not this time. Not so far.""
+Provider: ""Are you having any thoughts of harming yourself?""
+Patient: ""No, not harming myself, but I feel on edge and jittery.""
+Provider: ""Ok. Please let me or someone else know if you do start having any thoughts about harming yourself. Have you been able to stop drinking in the past?""
+Patient: ""I've tried, I really have doc. But I just can't seem to stop.""","High Weightage:
+1. Chief complaint: ""I can't stop shaking and feel like I'm going to crawl out of my skin.""
+2. History of present illness: ""Mr. McMillan is a 45-year-old [from chart] male with a history of alcohol use disorder who presents to the ED with worsening tremors, diaphoresis, anxiety, nausea, and insomnia. He states his last drink was approximately 24 hours ago. He reports drinking 12-18 beers daily for the last 20 years, with multiple prior withdrawal episodes, including one seizure 3 years ago during withdrawal. He denies current hallucinations, seizures, or suicidal ideation but feels ""on edge"" and ""jittery."" He has tried to quit drinking in the past without success.","=== CLINICAL DATA EXTRACTION ===
+
+1. Chief Complaint/Reason for Visit:
+   - Patient reports inability to stop shaking, feeling like he's going to crawl out of his skin, and severe anxiety.
+
+2. History of Present Illness (HPI):
+   - Onset and duration: Symptoms started approximately a day ago, after the patient stopped drinking alcohol.
+   - Character/quality of symptoms: Patient describes feeling jittery, on edge, and unable to sleep. He also reports sweating and feeling sick to his stomach.
+   - Previous episodes: Patient has attempted to stop drinking several times in the past. One of these attempts, approximately 3 years ago, resulted in a seizure.
+
+3. Current Medications:
+   - No current medications mentioned.
+
+4. Allergies:
+   - No allergies mentioned.
+
+5. Vital Signs:
+   - No vital signs mentioned.
+
+6. Past Medical History:
+   - Patient has a history of alcohol use disorder.
+
+7. Surgical History:
+   - No surgical history mentioned.
+
+8. Family History:
+   - No family history mentioned.
+
+9. Social History:
+   - Alcohol consumption: Patient reports drinking 12 to 18 beers daily for approximately 20 years.
+
+10. Review of Systems:
+   - Patient denies experiencing hallucinations or seizures at this time.
+   - Patient denies having thoughts of self-harm.
+
+11. Physical Exam Findings:
+   - No physical exam findings mentioned.
+
+12. Previous Test Results:
+   - No previous test results mentioned.
+
+13. Assessment/Differential Diagnosis:
+   - The provider is considering alcohol withdrawal given the patient's history and symptoms.
+
+14. Diagnostic Plan:
+   - No specific diagnostic tests mentioned.
+
+15. Treatment Plan:
+   - No specific treatment plan mentioned.
+
+16. Patient Education:
+   - The provider advised the patient to inform medical staff if he starts having thoughts about self-harm.
+
+17. Follow-up Instructions:
+   - No specific follow-up instructions mentioned.
+
+18. Referrals:
+   - No referrals mentioned.
+
+=== END OF EXTRACTION ===",Clinical context of stop drinking alcohol for an alcoholic to experiencing withdrawal symptoms; Provider recognizing symptoms are rt alcohol withdrawal - is AI able to make the same conclusion without provider stating?,High,Admission for acute alcohol withdrawal,healthcare,scribe_documentation,conversational,Standard,authenticated_provider
+"Provider: ""Good morning Ms. Delaware. What seems to be going on?""
+Patient: ""I've been feeling really weak and feverish for the past few days.""
+Provider: ""How long have you been feeling weak and feverish?""
+Patient: ""Probably since Monday, so I guess about 3 days.""
+Provider: ""I see. Can you tell me a little bit more about how you've been feeling?""
+Patient: ""I have just been feeling very woozy and all hot but also I get chills. I haven't been eating or drinking much. I also can't seem to catch my breath sometimes.""
+Provider: ""Ok. Are you having any chest pain?""
+Patient: ""No, nothing like that.""
+Provider: ""Any pain when you pee?""
+Patient: ""No ma'am.""
+Provider: ""Any recent travel?""
+Patient: ""No, we don't really travel much.""
+Provider: ""Any recent surgery or hospitalizations?""
+Patient: ""No ma'am.""
+Patient's daughter: ""Doctor, I'm worried because Mom was acting really confused this morning. Not like herself at all, and just very weak. I'm worried about her and had to bring her in.""","High Weightage:
+1. Chief complaint: ""I've been feeling really weak and feverish for the past few days.""
+2. History of present illness: Ms. Delaware is a 77-year-old female with a history of diabetes, hypertension, and CKD [from chart], presenting with 3 days of fever, generalized weakness, chills, and decreased oral intake. Reports feeling lightheaded and mildly short of breath. No specific localizing symptoms reported. Denies chest pain, dysuria, or recent travel. No history of recent surgeries or hospitalizations. Family brought patient in after they became confused and weak this morning.","=== CLINICAL DATA EXTRACTION ===
+
+1. Chief Complaint/Reason for Visit:
+   - Patient reports feeling weak and feverish
+
+2. History of Present Illness (HPI):
+   - Onset and duration: Symptoms started approximately 3 days ago (since Monday)
+   - Character/quality of symptoms: Patient describes feeling weak, feverish, and woozy
+   - Associated symptoms: Hot flashes, chills, decreased appetite, decreased fluid intake, shortness of breath, and confusion
+   - Previous episodes: Not mentioned
+
+3. Current Medications: Not mentioned:
+
+4. Allergies: Not mentioned:
+
+5. Vital Signs: Not mentioned:
+
+6. Past Medical History: Not mentioned:
+
+7. Surgical History: No recent surgery or hospitalizations:
+
+8. Family History: Not mentioned:
+
+9. Social History:
+   - Travel: No recent travel
+
+10. Review of Systems:
+   - Cardiovascular: Denies chest pain
+   - Genitourinary: Denies pain during urination
+
+11. Physical Exam Findings: Not mentioned:
+
+12. Previous Test Results: Not mentioned:
+
+13. Assessment/Differential Diagnosis: Not mentioned:
+
+14. Diagnostic Plan: Not mentioned:
+
+15. Treatment Plan: Not mentioned:
+
+16. Patient Education: Not mentioned:
+
+17. Follow-up Instructions: Not mentioned:
+
+18. Referrals: Not mentioned:
+
+=== END OF EXTRACTION ===","Feel a little woozy, feel all hot - can AI translate these patient descriptions accurately in HPI
+
+Can AI recognize when family member versus patient speaking?",High,Admission for sepsis,healthcare,scribe_documentation,conversational,Standard,authenticated_provider
+"Provider: ""Good afternoon Mr. Collins. What brings you in today?""
+Patient: ""I feel weak and haven't been urinating much.""
+Provider: ""Ok I see. Have you been eating/drinking as normal?
+Patient: ""No, I haven't really felt like eating or drinking. Sometimes I feel nauseous.""
+Provider: ""Have you noticed any swelling in your legs?""
+Patient: ""Yes, definitely.""
+Provider: ""How long has this been going on?""
+Patient: ""Probably the last 5 days. Well I don't know, maybe a week?""
+Provider: 'Have you had any fevers?""
+Patient: ""No, not that I know of.""
+Provider: ""What about pain on the sides of your lower back?""
+Patient: ""No.""
+Provider: ""Pain when you urinate?""
+Patient: ""No.""
+Provider: ""Any blood in your urine?""
+Patient: ""Not that I've seen.""
+Provider: ""How have you been doing managing your diabetes? What have your blood sugars been recently?""
+Patient: ""Hmm. They haven't been all that great. The one medicine I try to take gives me stomach problems. I don't really like taking it.""
+Provider: ""Have you taken any Advil? Aspirin? Aleve? Anything like that recently?""
+Patient: ""No.""
+Provider: ""Have you had any recent procedures that required contrast?""
+Patient: ""Hmmm. I don't think so.""
+Provider: ""Ok. Any recent illnesses?""
+Patient: ""Nope.""
+Provider: ""Any vomiting? Diarrhea?""
+Patient: ""Nah.""","High Weightage:
+1. Chief complaint: ""I feel weak and haven't been urinating much.""
+2. History of present illness: ""Mr. Collins is a 35-year-old male with type 2 diabetes mellitus, hypertension, and known stage 3 chronic kidney disease, presenting with progressive fatigue, decreased urine output, bilateral lower extremity swelling, and poor oral intake for the past 5-7 days. Denies fever, flank pain, dysuria, or hematuria. States blood sugars have been poorly controlled and has not been taking medications consistently. No recent NSAID use, contrast exposure, or illness. Reports nausea and anorexia. No vomiting or diarrhea.","=== CLINICAL DATA EXTRACTION ===
+
+1. Chief Complaint/Reason for Visit:
+   - Patient reports feeling weak and decreased urination
+
+2. History of Present Illness (HPI):
+   - Onset and duration: Symptoms have been present for approximately 5-7 days
+   - Character/quality of symptoms: Patient reports weakness and decreased urination
+   - Associated symptoms: Patient reports loss of appetite, nausea, and leg swelling
+   - Previous episodes: Not mentioned
+
+3. Current Medications:
+   - Patient is on a medication for diabetes, but reports it causes stomach problems
+
+4. Allergies:
+   - Not mentioned
+
+5. Vital Signs:
+   - Not mentioned
+
+6. Past Medical History:
+   - Patient has a history of diabetes
+
+7. Surgical History:
+   - Not mentioned
+
+8. Family History:
+   - Not mentioned
+
+9. Social History:
+   - Not mentioned
+
+10. Review of Systems:
+   - Patient denies fever, flank pain, dysuria, hematuria, recent use of NSAIDs, recent procedures requiring contrast, recent illnesses, vomiting, and diarrhea
+
+11. Physical Exam Findings:
+   - Not mentioned
+
+12. Previous Test Results:
+   - Not mentioned
+
+13. Assessment/Differential Diagnosis:
+   - Not mentioned
+
+14. Diagnostic Plan:
+   - Not mentioned
+
+15. Treatment Plan:
+   - Not mentioned
+
+16. Patient Education:
+   - Not mentioned
+
+17. Follow-up Instructions:
+   - Not mentioned
+
+18. Referrals:
+   - Not mentioned
+
+=== END OF EXTRACTION ===",AI able to pick up on nuance of medication noncompliance in conversation,High,Admission for acute kidney injury rt diabetes,healthcare,scribe_documentation,conversational,Standard,authenticated_provider
+"Provider: ""Good evening Ms. Sanders. What brings you in tonight?""
+Patient: ""I can't catch my breath, even when I'm sitting still.""
+Provider: ""How long has this been going on?""
+Patient: ""The last few days.""
+Provider: ""What has your sputum been like? Cough?""
+Patient: ""I've been having a lot more and it's now thick and yellow. And I've been coughing a lot.""
+Provider: ""Have you had any fevers?""
+Patient: ""No, no fever. But I have been wheezing and feeling really tired all the time.""
+Provider: ""Have you been using your rescue inhaler more often?""
+Patient: ""Yes, but it doesn't really help.""
+Provider: ""And you're still taking your Advair every 12 hours?""
+Patient: ""Yes, I'm really good at remembering that. But I did run out oxygen at home a couple days ago.""
+Provider: ""Ah ok. Are you having any chest pain?""
+Patient: ""No, no.""
+Provider: ""Any swelling in your legs?""
+Patient: ""No, no swelling.""
+Provider: ""Have you traveled recently? Been around anyone who was sick?""
+Patient: ""No, I haven't been anywhere. No one I know of has been sick. At least I don't think so.""","High weightage:
+1. Chief complaint: ""I can't catch my breath , even when I'm sitting still.""
+2. History of present illness: ""Ms. Collins is a 75-year-old female with a known history of COPD (GOLD stage III) [from chart] presenting with 3 days of worsening dyspnea, increased sputum production (now thick and yellow), and increased cough. Denies fever but reports wheezing and fatigue. Using rescue inhaler (albuterol) more frequently with limited relief. Denies chest pain or leg swelling. No recent travel or sick contacts. Reports running out of home oxygen 2 days ago.""
+3. Medications: Albuterol inhaler PRN [chart], Advair inhaled q12 hrs.","=== CLINICAL DATA EXTRACTION ===
+
+1. Chief Complaint/Reason for Visit:
+   - Patient reports difficulty breathing, even at rest
+
+2. History of Present Illness (HPI):
+   - Onset and duration: Symptoms started a few days ago
+   - Character/quality of symptoms: Increased sputum production, now thick and yellow; persistent cough; wheezing; fatigue
+   - Severity: Severe enough that patient's rescue inhaler is not providing relief
+   - Associated symptoms: No fever, chest pain, or leg swelling reported
+   - Previous episodes: Not mentioned
+
+3. Current Medications:
+   - Advair, taken every 12 hours
+   - Rescue inhaler, increased usage recently
+
+4. Allergies: Not mentioned:
+
+5. Vital Signs: Not mentioned:
+
+6. Past Medical History: Not mentioned, but implied respiratory condition due to use of Advair and rescue inhaler:
+
+7. Surgical History: Not mentioned:
+
+8. Family History: Not mentioned:
+
+9. Social History:
+   - Travel: No recent travel
+   - Exposure: No known exposure to sick individuals
+
+10. Review of Systems: Not mentioned:
+
+11. Physical Exam Findings: Not mentioned:
+
+12. Previous Test Results: Not mentioned:
+
+13. Assessment/Differential Diagnosis: Not mentioned:
+
+14. Diagnostic Plan: Not mentioned:
+
+15. Treatment Plan:
+   - Non-pharmacological interventions: Patient ran out of home oxygen a couple of days ago, implying a need for replenishment
+
+16. Patient Education: Not mentioned:
+
+17. Follow-up Instructions: Not mentioned:
+
+18. Referrals: Not mentioned:
+
+=== END OF EXTRACTION ===",Sound-alike drug name: Advair (fluticasone/salmeterol inhaled) confused with Advicor,High,Admission for COPD exacerbation,healthcare,scribe_documentation,conversational,Standard,authenticated_provider

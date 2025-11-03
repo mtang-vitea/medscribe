@@ -28,18 +28,13 @@ app.use(express.json({ limit: '10mb' })); // Support large transcripts
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Serve static files
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../frontend')));
 
-// API Routes
-app.post('/api/transcript/process', (req, res) => transcriptController.processTranscript(req, res));
-app.post('/api/transcript/transcribe', (req, res) => transcriptController.transcribeAudio(req, res));
-app.get('/api/transcript/status/:processingId', (req, res) => transcriptController.getProcessingStatus(req, res));
-app.get('/api/transcript/health', (req, res) => transcriptController.healthCheck(req, res));
-app.get('/api/transcript/categories', (req, res) => transcriptController.getCategories(req, res));
+// API Routes moved to FastAPI (backend/api.py). Keeping Node server for static frontend only.
 
 // Serve the main application
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 // Error handling middleware
@@ -64,10 +59,10 @@ app.use((req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🏥 Vitea test suite - MedAI scribe server running on port ${PORT}`);
+  console.log(`🏥 Vitea test suite - MedAI scribe static server running on port ${PORT}`);
   console.log(`📋 Web interface: http://localhost:${PORT}`);
-  console.log(`⚡ API endpoint: http://localhost:${PORT}/api/transcript/process`);
-  console.log(`💚 Health check: http://localhost:${PORT}/api/transcript/health`);
+  console.log(`⚡ API endpoint (FastAPI): http://localhost:8000/api/transcript/process`);
+  console.log(`💚 Health check (FastAPI): http://localhost:8000/api/transcript/health`);
 });
 
 // Graceful shutdown

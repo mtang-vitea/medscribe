@@ -60,9 +60,50 @@ A powerful medical AI scribe application that extracts structured clinical data 
    ```
 
 4. **Access the Application**
-   - Web Interface: http://localhost:3000
-   - API Endpoint: http://localhost:3000/api/transcript/process
-   - Health Check: http://localhost:3000/api/transcript/health
+   - Web Interface (frontend): http://localhost:3000
+   - API Endpoint (FastAPI): http://localhost:8000/api/transcript/process
+   - Health Check (FastAPI): http://localhost:8000/api/transcript/health
+
+## Starting the frontend under /frontend
+
+To run the app with the frontend served from /frontend and the API provided by FastAPI:
+
+1. Install Node dependencies (from repo root)
+   
+   ```bash
+   npm install
+   ```
+
+2. Start the frontend/static server (Node/Express serves ./frontend)
+   
+   ```bash
+   # Development (auto-reload)
+   npm run dev
+   
+   # Or production
+   npm start
+   ```
+   
+   This serves the web UI at http://localhost:3000.
+
+3. In a separate terminal, start the FastAPI backend
+   
+   ```bash
+   uvicorn backend.api:app --reload --port 8000
+   ```
+   
+   The frontend calls the API at http://localhost:8000/api/transcript by default. You can override this by defining a global before loading the app.js script:
+   
+   ```html
+   <script>
+     window.__API_BASE_URL__ = 'http://your-host:8000/api/transcript';
+   </script>
+   <script src="/js/app.js"></script>
+   ```
+
+4. Open the app
+   - Web UI: http://localhost:3000
+   - Health check: http://localhost:8000/api/transcript/health
 
 ## API Usage
 
