@@ -1,166 +1,118 @@
-import os
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.responses import JSONResponse
-from uuid import uuid4
-from datetime import datetime
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from typing import Dict
+import asyncio
+import uuid
 
-app = FastAPI(title="Vitea test suite - MedAI scribe (FastAPI)")
+from extraction_service import ExtractionService
+from prompt_clinical_extraction import CATEGORIES
 
-# CORS configuration
-allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",")
+app = FastAPI(title="Medical AI Scribe API", version="1.0.0")
+
+# CORS for local Next.js dev server
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[o.strip() for o in allowed_origins if o.strip()],
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
     allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Categories mirrored from src/prompts/clinical-extraction.js
-CATEGORIES = [
-    'Chief Complaint/Reason for Visit',
-    'History of Present Illness (HPI)',
-    'Current Medications',
-    'Allergies',
-    'Vital Signs',
-    'Past Medical History',
-    'Surgical History',
-    'Family History',
-    'Social History',
-    'Review of Systems',
-    'Physical Exam Findings',
-    'Previous Test Results',
-    'Assessment/Differential Diagnosis',
-    'Diagnostic Plan',
-    'Treatment Plan',
-    'Patient Education',
-    'Follow-up Instructions',
-    'Referrals'
-]
+# Serve project assets (logos) under /assets
+# This maps to the repository root so the existing logo files are accessible.
+app.mount("/assets", StaticFiles(directory="."), name="assets")
+
+# Initialize service
+extraction_service = ExtractionService()
+
+# In-memory status tracking for mock jobs
+processing_jobs: Dict[str, Dict] = {}
 
 
-def _basic_extraction(transcript: str):
-    """Very lightweight mock extraction that returns simple structured data.
-    This mirrors the response shape expected by the frontend without requiring
-    Node services or external AI.
-    """
-    items = []
+class TranscriptController:
+    """Controller handling transcript-related operations."""
 
-    # Naive parsing: split transcript into sentences and map first few to categories
-    sentences = [s.strip() for s in transcript.replace("\n", " ").split(".") if s.strip()]
-    for idx, cat in enumerate(CATEGORIES[:min(5, len(CATEGORIES))]):
-        details = []
-        if idx < len(sentences):
-            details.append(sentences[idx])
-        items.append({
-            "category": cat,
-            "details": details
-        })
+    @staticmethod
+    async def process_transcript(request_data: Dict):
+        """POST /api/transcript/process — Extract clinical data from a transcript."""
+        transcript = request_data.get("transcript")
+        options = request_data.get("options", {})
 
-    total_points = sum(len(x.get("details", [])) for x in items)
-    return {
-        "categories": items,
-        "summary": {
-            "totalDataPoints": total_points,
-            "categoriesFound": [x["category"] for x in items if x.get("details")],
-            "confidenceScore": None
+        if not transcript:
+            return JSONResponse(
+                status_code=400,
+                content={"success": False, "error": "Missing transcript text."}
+            )
+
+        result = await extraction_service.process_transcript(transcript, options)
+        return JSONResponse(content=result)
+
+    @staticmethod
+    async def transcribe_audio(file: UploadFile = File(...)):
+        """POST /api/transcript/transcribe — Transcribe audio to text."""
+        processing_id = str(uuid.uuid4())
+
+        # Mock asynchronous job creation
+        processing_jobs[processing_id] = {
+            "status": "processing",
+            "filename": file.filename,
+            "createdAt": asyncio.get_event_loop().time()
         }
-    }
 
+        # Simulate delayed transcription task
+        asyncio.create_task(TranscriptController._simulate_transcription(processing_id))
+        return JSONResponse(content={"processingId": processing_id, "status": "started"})
+
+    @staticmethod
+    async def get_processing_status(processing_id: str):
+        """GET /api/transcript/status/{processing_id} — Check transcription job status."""
+        job = processing_jobs.get(processing_id)
+        if not job:
+            return JSONResponse(status_code=404, content={"error": "Processing ID not found."})
+        return JSONResponse(content=job)
+
+    @staticmethod
+    async def health_check():
+        """GET /api/transcript/health — API health check."""
+        return JSONResponse(content={"status": "healthy", "service": "Medical AI Scribe"})
+
+    @staticmethod
+    async def get_categories():
+        """GET /api/transcript/categories — List available extraction categories."""
+        return JSONResponse(content={"categories": CATEGORIES})
+
+    @staticmethod
+    async def _simulate_transcription(processing_id: str):
+        """Simulate background transcription (mock)."""
+        await asyncio.sleep(3)
+        processing_jobs[processing_id]["status"] = "completed"
+        processing_jobs[processing_id]["transcript"] = (
+            "Doctor: Hello, how are you today? "
+            "Patient: I've had chest pain for two days..."
+        )
 
 @app.post("/api/transcript/process")
-async def process_transcript(payload: dict):
-    transcript = payload.get("transcript")
-    options = payload.get("options", {}) or {}
+async def process_transcript(request_data: Dict):
+    return await TranscriptController.process_transcript(request_data)
 
-    if transcript is None:
-        raise HTTPException(status_code=400, detail={
-            "error": "Transcript is required",
-            "code": "MISSING_TRANSCRIPT"
-        })
-    if not isinstance(transcript, str):
-        raise HTTPException(status_code=400, detail={
-            "error": "Transcript must be a string",
-            "code": "INVALID_TRANSCRIPT_TYPE"
-        })
 
-    processing_id = str(uuid4())
-
-    # In this Python port we provide a simple local extraction. If options.mockResponse is True,
-    # we still follow the same path but it's already effectively a mock implementation.
-    data = _basic_extraction(transcript)
-
-    validation = {
-        "isValid": True,
-        "warnings": [],
-        "errors": []
-    }
-
-    return JSONResponse({
-        "success": True,
-        "processingId": processing_id,
-        "data": data,
-        "validation": validation,
-        "metadata": {
-            "processedAt": datetime.utcnow().isoformat() + "Z",
-            "transcriptLength": len(transcript),
-            "extractionMethod": options.get("method", "python-basic")
-        }
-    })
+@app.post("/api/transcript/transcribe")
+async def transcribe_audio(file: UploadFile = File(...)):
+    return await TranscriptController.transcribe_audio(file)
 
 
 @app.get("/api/transcript/status/{processing_id}")
 async def get_processing_status(processing_id: str):
-    return {"processingId": processing_id, "status": "completed", "message": "Status tracking not implemented yet"}
+    return await TranscriptController.get_processing_status(processing_id)
 
 
 @app.get("/api/transcript/health")
 async def health_check():
-    return {
-        "status": "healthy",
-        "service": "Vitea test suite - AI scribe Transcript Processor (FastAPI)",
-        "timestamp": datetime.now().isoformat() + "Z",
-        "version": os.getenv("APP_VERSION", "1.0.0")
-    }
+    return await TranscriptController.health_check()
 
 
 @app.get("/api/transcript/categories")
 async def get_categories():
-    return {
-        "categories": CATEGORIES,
-        "description": "Clinical data extraction categories with weightage levels"
-    }
-
-
-@app.post("/api/transcript/transcribe")
-async def transcribe_audio(
-    audio: UploadFile = File(...),
-    mockTranscription: bool = Form(False),
-):
-    # We do not perform real transcription here. Provide a safe mock.
-    if audio is None:
-        raise HTTPException(status_code=400, detail={
-            "error": "No audio file provided",
-            "code": "NO_FILE"
-        })
-
-    # Basic validations similar to Node (size limits aren't directly available here without reading)
-    # Accept the upload and return a mock transcript
-    transcript_text = (
-        "This is a mock transcription of the uploaded audio file for demonstration purposes. "
-        "The patient reports intermittent chest discomfort over the past two days."
-    ) if mockTranscription else (
-        "Transcription service is not configured; returning placeholder transcript from FastAPI."
-    )
-
-    return {
-        "success": True,
-        "transcript": transcript_text,
-        "filename": audio.filename,
-        "mimetype": audio.content_type,
-    }
-
-
-# Uvicorn entry point guidance (optional)
-# To run: uvicorn backend.api:app --reload --port 8000
+    return await TranscriptController.get_categories()

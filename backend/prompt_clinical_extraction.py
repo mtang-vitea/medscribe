@@ -1,10 +1,11 @@
-/**
- * Medical AI Scribe - Clinical Data Extraction Prompt Template
- * This module contains the comprehensive prompt for extracting clinical data
- * from doctor-patient conversations.
- */
+"""
+Medical AI Scribe - Clinical Data Extraction Prompt Template
+------------------------------------------------------------
+This module contains the comprehensive prompt for extracting clinical data
+from doctor-patient conversations.
+"""
 
-const CLINICAL_EXTRACTION_PROMPT = `# Medical AI Scribe - Clinical Data Extraction Prompt
+CLINICAL_EXTRACTION_PROMPT = """# Medical AI Scribe - Clinical Data Extraction Prompt
 
 You are a medical AI scribe assistant designed to extract clinically relevant data points from doctor-patient conversations. Your task is to analyze transcribed medical consultations and generate structured clinical documentation.
 
@@ -76,23 +77,26 @@ CRITICAL: You must return your response in the EXACT format specified below, sta
 
 ## Output Example Format:
 
-\`\`\`
 === CLINICAL DATA EXTRACTION ===
 
-1. [Category]:
-   - [Specific finding/information]
-   - [Additional details]
+[Category]:
 
-2. [Next Category]:
-   - [Finding]
+[Specific finding/information]
 
-3. [Another Category]:
-   - [Information]
+[Additional details]
+
+[Next Category]:
+
+[Finding]
+
+[Another Category]:
+
+[Information]
 
 [Continue with numbered items for all relevant categories...]
 
 === END OF EXTRACTION ===
-\`\`\`
+
 
 ## Quality Checks:
 - Ensure no clinical information is missed
@@ -110,30 +114,26 @@ CONVERSATION TRANSCRIPT:
 {{TRANSCRIPT}}
 ---
 
-Please extract and categorize all clinical information according to the above guidelines.`;
+Please extract and categorize all clinical information according to the above guidelines.
+"""
 
-const CATEGORIES = [
-  'Chief Complaint/Reason for Visit',
-  'History of Present Illness (HPI)',
-  'Current Medications',
-  'Allergies',
-  'Vital Signs',
-  'Past Medical History',
-  'Surgical History',
-  'Family History',
-  'Social History',
-  'Review of Systems',
-  'Physical Exam Findings',
-  'Previous Test Results',
-  'Assessment/Differential Diagnosis',
-  'Diagnostic Plan',
-  'Treatment Plan',
-  'Patient Education',
-  'Follow-up Instructions',
-  'Referrals'
-];
-
-module.exports = {
-  CLINICAL_EXTRACTION_PROMPT,
-  CATEGORIES
-};
+CATEGORIES = [
+    "Chief Complaint/Reason for Visit",
+    "History of Present Illness (HPI)",
+    "Current Medications",
+    "Allergies",
+    "Vital Signs",
+    "Past Medical History",
+    "Surgical History",
+    "Family History",
+    "Social History",
+    "Review of Systems",
+    "Physical Exam Findings",
+    "Previous Test Results",
+    "Assessment/Differential Diagnosis",
+    "Diagnostic Plan",
+    "Treatment Plan",
+    "Patient Education",
+    "Follow-up Instructions",
+    "Referrals"
+]
