@@ -5,6 +5,9 @@ click==8.3.0
 fastapi==0.121.0
 h11==0.16.0
 idna==3.11
+openai>=1.52.2
+python-dotenv>=1.0.1
+anthropic>=0.34.2
 pydantic==2.12.3
 pydantic_core==2.41.4
 python-multipart==0.0.20
