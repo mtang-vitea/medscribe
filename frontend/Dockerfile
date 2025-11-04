@@ -27,10 +27,10 @@ COPY --from=frontend-builder /app/frontend/public ./public
 COPY --from=frontend-builder /app/frontend/package*.json ./
 
 # Expose Next.js port
-EXPOSE 3001
+EXPOSE 8094
 
 # Environment defaults
 ENV NODE_ENV=production \
-    PORT=3001
+    PORT=8094
 
-CMD ["npm", "run", "start", "--", "-p", "3001"]
+CMD ["npm", "run", "start", "--", "-p", "8094"]

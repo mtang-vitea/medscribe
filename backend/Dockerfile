@@ -38,7 +38,7 @@ WORKDIR /app
 COPY . .
 
 # Expose FastAPI port
-EXPOSE 8000
+EXPOSE 8093
 
 # Environment defaults
 ENV PYTHONUNBUFFERED=1 \
@@ -46,4 +46,4 @@ ENV PYTHONUNBUFFERED=1 \
 
 # Run the server (no reload in container)
 # Keep working dir at repo root so StaticFiles(directory=".") works
-CMD ["uvicorn", "api:app", "--app-dir", "backend", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "api:app", "--app-dir", "backend", "--host", "0.0.0.0", "--port", "8093"]
