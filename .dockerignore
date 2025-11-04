@@ -1,0 +1,25 @@
+# Global ignores
+.git
+.gitignore
+.env
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.pytest_cache
+
+# Node related
+frontend/node_modules
+frontend/.next/cache
+frontend/.next/trace
+frontend/.next/types
+frontend/.next/static/chunks/cache
+
+# Python build
+build
+dist
+*.egg-info
+
+# OS files
+.DS_Store

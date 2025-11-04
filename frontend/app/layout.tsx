@@ -4,6 +4,11 @@ import Image from "next/image";
 export const metadata = {
     title: "Medical AI Scribe",
     description: "Paste a transcript and process it",
+    icons: {
+        icon: "/vitea-dark.jpeg",
+        shortcut: "/vitea-dark.jpeg",
+        apple: "/vitea-dark.jpeg",
+    },
 };
 
 export default function RootLayout({children}: { children: React.ReactNode }) {
