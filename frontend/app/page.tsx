@@ -1,6 +1,6 @@
 "use client";
 
-import {useMemo, useState} from "react";
+import {useMemo, useState, useRef} from "react";
 
 import {Label} from "@/components/ui/label";
 import {Textarea} from "@/components/ui/textarea";
@@ -12,6 +12,10 @@ import ResultView, {type ExtractionResponse} from "@/components/ResultView";
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 export default function Page() {
+    const mediaStreamRef = useRef<MediaStream | null>(null);
+    const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+    const mediaChunksRef = useRef<BlobPart[]>([]);
+    const [isRecording, setIsRecording] = useState(false);
     const [transcript, setTranscript] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -269,15 +273,15 @@ export default function Page() {
                                 type="button"
                                 variant="secondary"
                                 onClick={() => document.getElementById("file-input")?.click()}
-                                disabled={audioLoading || loading}
+                                disabled={audioLoading || loading || isRecording}
                             >
                                 Upload File
                             </Button>
                             <Button
                                 type="button"
                                 variant="secondary"
-                                onClick={() => !audioLoading && document.getElementById("audio-input")?.click()}
-                                disabled={audioLoading || loading}
+                                onClick={() => !audioLoading && !isRecording && document.getElementById("audio-input")?.click()}
+                                disabled={audioLoading || loading || isRecording}
                             >
                                 {audioLoading && (
                                     <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24">
@@ -287,6 +291,115 @@ export default function Page() {
                                 )}
                                 {audioLoading ? "Transcribing…" : "Upload Audio"}
                             </Button>
+                            {/* Live Recording Controls */}
+                            {!isRecording ? (
+                                <Button
+                                    type="button"
+                                    variant="destructive"
+                                    onClick={async () => {
+                                        try {
+                                            setError(null);
+                                            setResponse(null);
+                                            setProcessingId(null);
+                                            setJobStatus(null);
+                                            if (!navigator.mediaDevices?.getUserMedia) {
+                                                setError("Live recording is not supported in this browser.");
+                                                return;
+                                            }
+                                            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                                            mediaStreamRef.current = stream;
+                                            const mimeType =
+                                                MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+                                                    ? "audio/webm;codecs=opus"
+                                                    : MediaRecorder.isTypeSupported("audio/ogg;codecs=opus")
+                                                    ? "audio/ogg;codecs=opus"
+                                                    : "audio/webm";
+                                            const mr = new MediaRecorder(stream, { mimeType });
+                                            mediaChunksRef.current = [];
+                                            mr.ondataavailable = (ev) => {
+                                                if (ev.data && ev.data.size > 0) mediaChunksRef.current.push(ev.data);
+                                            };
+                                            mr.onstop = async () => {
+                                                try {
+                                                    setAudioLoading(true);
+                                                    const blob = new Blob(mediaChunksRef.current, { type: mimeType });
+                                                    // Prefer an extension that matches the MIME to help backend suffix detection
+                                                    const ext = mimeType.includes("ogg") ? "ogg" : "webm";
+                                                    const file = new File([blob], `recording.${ext}`, { type: mimeType });
+                                                    const form = new FormData();
+                                                    form.append("file", file, file.name);
+                                                    const res = await fetch(`${API_URL}/api/transcript/transcribe`, {
+                                                        method: "POST",
+                                                        body: form,
+                                                    });
+                                                    const data = await res.json();
+                                                    if (!res.ok) {
+                                                        throw new Error(data?.error || "Recording upload failed");
+                                                    }
+                                                    if (data?.transcript) {
+                                                        const text = data.transcript as string;
+                                                        setTranscript(text);
+                                                        if (text.length > limit) {
+                                                            setError("Transcribed text is too long. Please reduce below 200k characters.");
+                                                        } else if (text.trim()) {
+                                                            await processTranscriptText(text);
+                                                        } else {
+                                                            setError("Transcription returned empty text.");
+                                                        }
+                                                    } else if (data?.processingId) {
+                                                        setProcessingId(data.processingId);
+                                                        setJobStatus(data?.status ?? "started");
+                                                        const finalJob = await waitForCompletion(data.processingId);
+                                                        const text = finalJob?.transcript || "";
+                                                        setTranscript(text);
+                                                        if (text.length > limit) {
+                                                            setError("Transcribed text is too long. Please reduce below 200k characters.");
+                                                        } else if (text.trim()) {
+                                                            await processTranscriptText(text);
+                                                        } else {
+                                                            setError("Transcription returned empty text.");
+                                                        }
+                                                    } else {
+                                                        setError("Unexpected response from transcription service.");
+                                                    }
+                                                } catch (err) {
+                                                    const message = err instanceof Error ? err.message : "Failed to upload recording";
+                                                    setError(message);
+                                                } finally {
+                                                    setAudioLoading(false);
+                                                    // Cleanup tracks
+                                                    mediaStreamRef.current?.getTracks().forEach(t => t.stop());
+                                                    mediaStreamRef.current = null;
+                                                }
+                                            };
+                                            mediaRecorderRef.current = mr;
+                                            mr.start(250); // gather chunks every 250ms
+                                            setIsRecording(true);
+                                        } catch (err) {
+                                            const message = err instanceof Error ? err.message : "Could not start recording";
+                                            setError(message);
+                                        }
+                                    }}
+                                    disabled={audioLoading || loading}
+                                >
+                                    Start Recording
+                                </Button>
+                            ) : (
+                                <Button
+                                    type="button"
+                                    variant="default"
+                                    onClick={() => {
+                                        try {
+                                            mediaRecorderRef.current?.stop();
+                                        } finally {
+                                            setIsRecording(false);
+                                        }
+                                    }}
+                                    disabled={audioLoading || loading}
+                                >
+                                    Stop & Transcribe
+                                </Button>
+                            )}
 
                             <Button type="submit" disabled={loading || audioLoading || tooLong}>
                                 {loading && (

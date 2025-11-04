@@ -33,18 +33,8 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
                     />
                     <span className="text-lg font-semibold tracking-tight">Medscribe</span>
                 </div>
-                <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
-                    <a className="hover:text-slate-900" href="#">Docs</a>
-                    <a className="hover:text-slate-900" href="#">Changelog</a>
-                    <a className="hover:text-slate-900" href="#">Support</a>
-                </nav>
             </header>
             {children}
-            <footer className="mt-16 border-t border-slate-200 pt-6 text-xs text-slate-500">
-                <p>
-                    Built with Next.js & Tailwind. Ensure your backend allows CORS from http://localhost:3000.
-                </p>
-            </footer>
         </div>
         </body>
         </html>
