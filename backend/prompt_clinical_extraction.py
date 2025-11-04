@@ -79,17 +79,17 @@ CRITICAL: You must return your response in the EXACT format specified below, sta
 
 === CLINICAL DATA EXTRACTION ===
 
-[Category]:
+1. [Category]:
 
 [Specific finding/information]
 
 [Additional details]
 
-[Next Category]:
+2. [Next Category]:
 
 [Finding]
 
-[Another Category]:
+3. [Another Category]:
 
 [Information]
 

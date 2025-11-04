@@ -222,11 +222,11 @@ class ExtractionService:
 
 if __name__ == "__main__":
     import asyncio
+    from sample_transcript import sample_transcript
 
     async def main():
         service = ExtractionService()
-        transcript = "Doctor: How are you feeling today? Patient: I've had chest pain for two days..."
-        result = await service.process_transcript(transcript, {"mockResponse": False})
+        result = await service.process_transcript(sample_transcript, {"mockResponse": False})
         print(json.dumps(result, indent=2))
 
     asyncio.run(main())

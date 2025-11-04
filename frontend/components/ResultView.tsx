@@ -52,23 +52,42 @@ function SectionHeader({ title, hint }: { title: string; hint?: string }) {
 export function ResultView({ result }: { result: ExtractionResponse }) {
   const categories = result?.data?.categories ?? [];
 
-  if (!Array.isArray(categories) || categories.length === 0) {
-    return (
-      <Card className="mt-6">
-        <CardContent>
-          <p className="text-sm text-slate-600">No categories to display.</p>
-        </CardContent>
-      </Card>
-    );
-  }
+  // Only show these categories, and enforce this display order
+  const allowedOrder = [
+    "Chief Complaint/Reason for Visit",
+    "History of Present Illness (HPI)",
+    "Current Medications",
+    "Allergies",
+    "Vital Signs",
+    "Past Medical History",
+    "Surgical History",
+    "Family History",
+    "Social History",
+    "Review of Systems",
+    "Physical Exam Findings",
+    "Previous Test Results",
+    "Assessment/Differential Diagnosis",
+    "Diagnostic Plan",
+    "Treatment Plan",
+    "Patient Education",
+    "Follow-up Instructions",
+    "Referrals",
+  ];
+
+  const normalized: ExtractionCategory[] = Array.isArray(categories)
+    ? allowedOrder.map((name) => {
+        const found = categories.find((c) => c.category === name);
+        return found ?? { category: name, details: [] };
+      })
+    : allowedOrder.map((name) => ({ category: name, details: [] }));
 
   return (
-    <div className="mt-6 overflow-x-auto">
-      <div className="flex gap-4 snap-x snap-mandatory pb-2">
-        {categories.map((c, idx) => (
-          <Card key={idx} className="min-w-[320px] max-w-sm snap-start">
+    <div className="mt-6">
+      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2">
+        {normalized.map((c, idx) => (
+          <Card key={idx}>
             <CardHeader>
-              <CardTitle className="text-base">{c.category}</CardTitle>
+              <CardTitle>{c.category}</CardTitle>
             </CardHeader>
             <CardContent>
               {Array.isArray(c.details) && c.details.length > 0 ? (
@@ -78,7 +97,7 @@ export function ResultView({ result }: { result: ExtractionResponse }) {
                   ))}
                 </ul>
               ) : (
-                <p className="text-sm text-slate-500">data not found</p>
+                <p className="text-sm text-slate-500">No additional details provided</p>
               )}
             </CardContent>
           </Card>
