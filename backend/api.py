@@ -11,7 +11,7 @@ import tempfile
 from extraction_service import ExtractionService
 from prompt_clinical_extraction import CATEGORIES
 
-app = FastAPI(title="Medical AI Scribe API", version="1.0.0")
+app = FastAPI(title="Medical AI Scribe API", version="1.0.0", root_path="/demo/medscribe")
 
 # CORS for local Next.js dev server
 app.add_middleware(

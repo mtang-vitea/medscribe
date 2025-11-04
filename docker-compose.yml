@@ -16,7 +16,7 @@ services:
       - .env
     environment:
       # Allow CORS from frontend service and local hosts
-      - CORS_ALLOWED_ORIGINS=http://localhost:8094,http://frontend:8094
+      - CORS_ALLOWED_ORIGINS=http://localhost:8094,http://frontend:8094,http://viteagentic.com,https://viteagentic.com
     volumes:
       - ./:/app:ro
     profiles: ["dev", "prod"]
@@ -28,13 +28,13 @@ services:
       target: frontend
     image: medscribe-frontend:latest
     container_name: medscribe-frontend
-    depends_on:
+    depends_on: 
       - backend
     ports:
       - "8094:8094"
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=http://localhost:8093
+      - NEXT_PUBLIC_API_URL=https://viteagentic.com/demo/medscribe
     profiles: ["dev", "prod"]
 
 networks:
